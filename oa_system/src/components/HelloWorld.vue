@@ -1,5 +1,5 @@
 <template>
-  <router-link to="newcontact">
+  <router-link to="home">
     <h1>{{ msg }}</h1>
   </router-link>
 </template>
