@@ -1,25 +1,18 @@
 <template>
- <router-view />
-<!-- <div>
-  <login></login>
-</div> -->
+  <router-view></router-view>
 </template>
 
 <script>
-
-// import Login from "./components/Login"
 export default {
   name: 'App',
-  // components:{
-  //   Login
-  // }
+  components: {
+  },
 }
 </script>
 
 <style>
-*{
+ *{
   margin: 0;
   padding: 0;
-}
 
-</style>
+

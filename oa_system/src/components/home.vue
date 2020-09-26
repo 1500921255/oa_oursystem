@@ -1,14 +1,14 @@
 <template>
-  <el-row class="panel m-w-1280">
+  <el-row class="panel m-w-1280" id="home">
     <el-col :span="24" class="panel-top">
       <el-col :span="3">
-        <img :src="img" class="logo" height="50px">
-        <!-- <template v-if="logo_type == '1'">
-          <img :src="img" class="logo">
+        123
+        <template>
+          <!-- <img :src="img" class="logo"> -->
         </template>
-        <template v-else>
-          <span class="p-l-20">{{title}}</span>
-        </template> -->
+        <template>
+          <span class="p-l-20">123</span>
+        </template>
       </el-col>
       <el-col :span="1" class="menu-hidden">
         <i class="el-icon-menu"></i>
@@ -34,17 +34,32 @@
       </el-col>
     </el-col>
     <el-col :span="24" class="panel-center">
+      <leftmenu></leftmenu>
       <!--<el-col :span="4">-->
-      <section class="panel-c-c" :class="{'hide-leftMenu': hasChildMenu}">
+      <section class="panel-c-c">
         <div class="grid-content bg-purple-light">
           <el-col :span="24">
-
+            213213
           </el-col>
         </div>
       </section>
     </el-col>
   </el-row>
 </template>
+
+<script>
+import leftmenu from './menu/left_menu'
+export default {
+  name: 'home',
+  components: {
+    leftmenu
+  },
+  data () {
+    return {
+    }
+  }
+}
+</script>
 
 <style>
 * {
@@ -112,12 +127,3 @@
   text-align: center;
 }
 </style>
-<script>
-
-export default {
-  data () {
-    return {
-    }
-  }
-}
-</script>
