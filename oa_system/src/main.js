@@ -3,11 +3,16 @@ import 'element-ui/lib/theme-chalk/index.css' // 新添加，避免后期打包�
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import axios from '../node_modules/axios'
+import qs from 'qs'
 
 Vue.use(ElementUI)
+Vue.prototype.axios = axios
 Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  axios,
+  qs
 }).$mount('#app')
