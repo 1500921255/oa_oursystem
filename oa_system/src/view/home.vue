@@ -2,12 +2,11 @@
   <el-row class="panel m-w-1280" id="home">
     <el-col :span="24" class="panel-top">
       <el-col :span="3">
-        123
         <template>
           <!-- <img :src="img" class="logo"> -->
         </template>
         <template>
-          <span class="p-l-20">123</span>
+          <span class="p-l-20">管理系统</span>
         </template>
       </el-col>
       <el-col :span="1" class="menu-hidden">
@@ -39,7 +38,7 @@
       <section class="panel-c-c">
         <div class="grid-content bg-purple-light">
           <el-col :span="24">
-            213213
+            <router-view></router-view>
           </el-col>
         </div>
       </section>
@@ -48,11 +47,11 @@
 </template>
 
 <script>
-import leftmenu from './menu/left_menu'
+import leftmenu from '@/components/left_menu'
 export default {
   name: 'home',
   components: {
-    leftmenu
+    leftmenu,
   },
   data () {
     return {
