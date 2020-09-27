@@ -3,21 +3,18 @@
     <div class="logo-lable">
       <img class="logo" src="../../src/assets/logo.png">
     </div>
-    <router-link :to="{ path: '/home'}">
-      213123
-    </router-link>
     <div class="from-lable">
       <el-form>
         <el-form-item>
           <el-input type="text" class="login-input" placeholder="用户名" v-model="username" /><br>
         </el-form-item>
         <el-form-item>
-          <el-input type="text" class="login-input" placeholder="密码" v-model="password" /><br>
+          <el-input type="password" class="login-input" placeholder="密码" v-model="password" /><br>
         </el-form-item>
         <el-form-item>
-          <!-- <el-button round class="login-btn" type="primary" @click="login"> -->
-          <!-- 登录
-          </el-button> -->
+          <el-button round class="login-btn" type="primary" @click="login">
+          登录
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -27,26 +24,51 @@
 <script>
 export default {
   name: "login",
-  // methods: {
-  //   login () {
-  //     this.axios.get('/', {
-  //       params: {
-  //         username: "0000",
-  //         password: "oa0000"
-  //       }
-  //     })
-  //       .then(function (response) {
-  //         console.log(response);
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-  //       });
-  //   }
-  // },
+  methods: {
+    login () {
+      let that = this
+      if(this.username == null ){
+        alert("账号或密码不能为空")
+      }else if(this.password == null){
+        alert("账号或密码不能为空")
+      }else{
+        this.axios.get('http://localhost:8080/employee-user/login', {
+        params: {
+          employee_user: this.username,
+          employee_pwd: this.password
+        }
+      })
+        .then(function (response) {
+          console.log(response.data.data);
+          if(response.data.data ==null){
+          //  that.$options.methods.Loginfailalert()
+          alert("登陆失败")
+          }else{
+            that.$router.push("/home");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+    },
+    /**登陆失败弹窗 */
+    Loginfailalert() {
+        this.$alert('登陆失败，请检查账号或密码是否正确', '通知', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
+      }
+  },
   data () {
     return {
-      username: '',
-      password: ''
+      username: null,
+      password: null
     }
   }
 }

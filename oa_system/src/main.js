@@ -14,5 +14,6 @@ new Vue({
   render: h => h(App),
   router,
   axios,
-  qs
+  qs,
 }).$mount('#app')
+
