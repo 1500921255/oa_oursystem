@@ -53,9 +53,9 @@ export default {
     return {
       tableData:[],
       search: "",
-      pagesize:5,//每页的数据条数
+      pagesize:7,//每页的数据条数
       currentPage:1,//默认开始页面
-      total:1000
+      total:10
     };
   },
   methods: {
@@ -78,6 +78,8 @@ export default {
       .then(function (response) {
         console.log(response.data.data);
         that.tableData = response.data.data
+         that.total=that.tableData.length;
+         console.log(that.total)
       })
       .catch(function (error) {
         console.log(error);
