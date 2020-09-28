@@ -5,7 +5,7 @@ import home from '@/view/home'
 import Login from '@/view/Login'
 import index from '@/view/index'
 import mailbox from '@/view/mailbox'
-import sys_log from '@/view/sys_log'
+import department from '@/view/department'
 import user_info from '@/view/user_info'
 import calendar from '@/view/calendar'
 import employee_user from '@/view/employee_user'
@@ -25,7 +25,7 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: home,
-      children:[
+      children: [
         {
           path: '/index',
           name: 'index',
@@ -57,9 +57,9 @@ export default new Router({
           component: user_info
         },
         {
-          path: '/sys_log',
-          name: 'sys_log',
-          component: sys_log
+          path: '/department',
+          name: 'department',
+          component: department
         },
         {
           path: '/mailbox',

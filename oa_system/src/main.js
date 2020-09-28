@@ -6,6 +6,7 @@ import router from './router'
 import axios from '../node_modules/axios'
 import qs from 'qs'
 
+
 Vue.use(ElementUI)
 Vue.prototype.axios = axios
 Vue.config.productionTip = false

@@ -12,7 +12,7 @@
       <el-col :span="1" class="menu-hidden">
         <i class="el-icon-menu"></i>
       </el-col>
-      <el-col :span="18" class="ofv-hd">
+      <el-col :span="15" class="ofv-hd">
         <el-row>
           <el-col :span="2">
             乐山
@@ -23,12 +23,26 @@
           <el-col :span="14">
             18-25小雨
           </el-col>
-          <el-col :span="6">
-            欢迎你,管理员
-          </el-col>
         </el-row>
       </el-col>
       <el-col :span="2" class="pos-rel">
+        欢迎你，管理员
+      </el-col>
+      <el-col :span="1" class="pos-rel">
+        <el-col :span="12" class="pos-rel">
+          <i class="el-icon-message"></i>
+        </el-col>
+        <el-col :span="12" class="pos-rel">
+          <i class="el-icon-message-solid"></i>
+        </el-col>
+      </el-col>
+      <el-col :span="1" class="pos-rel">
+        <i class="el-icon-open"></i>
+        <!-- <i class="el-icon-turn-off"></i> -->
+        护眼
+      </el-col>
+      <el-col :span="1" class="pos-rel">
+        <i class="el-icon-switch-button"></i>
         退出
       </el-col>
     </el-col>
@@ -84,8 +98,8 @@ export default {
 }
 
 .panel-top {
-  height: 50px;
-  line-height: 50px;
+  height: 40px;
+  line-height: 40px;
   background: white;
   color: #c0ccda;
   border-bottom: 1px solid #cccccc;
@@ -94,7 +108,7 @@ export default {
 .panel-center {
   background: white;
   position: absolute;
-  top: 50px;
+  top: 40px;
   bottom: 0px;
   overflow: hidden;
 }
@@ -124,5 +138,8 @@ export default {
   border-left: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   text-align: center;
+}
+.pos-rel {
+  font-size: 11px;
 }
 </style>
