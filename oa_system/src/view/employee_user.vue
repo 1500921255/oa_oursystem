@@ -5,7 +5,7 @@
     </el-header> -->
     <el-main class="main">
       <div class="tools">
-        <el-button type="success" plain size="mini" class="btn-tools"
+        <el-button type="success" plain size="mini" class="btn-tools" 
           >添加职工</el-button
         >
         <el-input
@@ -16,20 +16,19 @@
         />
       </div>
       <el-divider class="divider"></el-divider>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%">
+      <el-table :data="tableData" style="width: 100%">
         <el-table-column  label="时间" prop="employeeId"> </el-table-column>
         <el-table-column label="姓名" prop="employeeName"> </el-table-column>
         <el-table-column label="性别" prop="employeeSex"> </el-table-column>
         <el-table-column align="right">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">
+            <el-button size="mini" @click="handleEdit(scope.row)">
               编辑
             </el-button>
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)"
-            >
+              @click="handleDelete(scope.row)">
               删除
             </el-button>
           </template>
@@ -39,12 +38,13 @@
         <el-pagination
           background
           layout="prev, pager, next"
-          :total="total"
-          @current-change="current_change"
+          :page-count='pagecount'
+          @current-change="currentPage"
         ></el-pagination>
       </div>
     </el-main>
   </el-container>
+
 </template>
 
 <script>
@@ -53,33 +53,75 @@ export default {
     return {
       tableData:[],
       search: "",
-      pagesize:7,//每页的数据条数
-      currentPage:1,//默认开始页面
-      total:10
+      currentpage:'',
+      pagecount:0
     };
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
+    handleEdit(row) {
+     // console.log(row);
+      this.$store.commit('employeeUserinfoChange',row)
+      this.$router.push("/employee_user_update");
     },
-    handleDelete(index, row) {
-      console.log(index, row);
+    handleDelete(row) {
+      console.log(row.employeeId);
+         this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+        this.axios.delete("http://localhost:8080/employee-user/DeleteUser/"+row.employeeId, {
+        methods: "delete",
+      })
+      .then(function (response) {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
     },
-    current_change:function(currentPage){
-        this.currentPage = currentPage;
-      }
-  },
-  created() {
-    let that = this
-    this.axios
-      .get("http://localhost:8080/employee-user/Page", {
+    currentPage(currentpage){
+      console.log(currentpage)
+        let that = this
+        this.axios.get("http://localhost:8080/employee-user/Page/"+currentpage, {
         methods: "get",
       })
       .then(function (response) {
-        console.log(response.data.data);
-        that.tableData = response.data.data
-         that.total=that.tableData.length;
-         console.log(that.total)
+        that.tableData = response.data.data.data
+        console.log( that.tableData);
+        that.pagecount = response.data.data.pages
+        that.currentPages = response.data.data.currentPage
+        //  that.total=that.tableData.length;
+        //  console.log(that.total)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+  },
+  created() {
+    let that = this
+    this.axios.get("http://localhost:8080/employee-user/Page/1", {
+        methods: "get",
+      })
+      .then(function (response) {
+        that.tableData = response.data.data.data
+        console.log( that.tableData);
+        that.pagecount = response.data.data.pages
+        that.currentPages = response.data.data.currentPage
+        //  that.total=that.tableData.length;
+        //  console.log(that.total)
       })
       .catch(function (error) {
         console.log(error);

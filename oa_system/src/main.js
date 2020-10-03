@@ -5,16 +5,22 @@ import App from './App.vue'
 import router from './router'
 import axios from '../node_modules/axios'
 import qs from 'qs'
+import store from './store'
 
 
 Vue.use(ElementUI)
+Vue.use(store)
 Vue.prototype.axios = axios
 Vue.config.productionTip = false
+// Loading.service(options);
 
 new Vue({
   render: h => h(App),
   router,
   axios,
   qs,
+  store,
+  method:{
+  }
 }).$mount('#app')
 

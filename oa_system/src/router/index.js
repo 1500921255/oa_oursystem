@@ -10,6 +10,7 @@ import user_info from '@/view/user_info'
 import calendar from '@/view/calendar'
 import employee_user from '@/view/employee_user'
 import personage_center from '@/view/personage_center'
+import employee_user_update from '@/view/employee_user_update'
 
 
 
@@ -34,7 +35,7 @@ export default new Router({
         {
           path: '/employee_user',
           name: 'employee_user',
-          component: employee_user
+          component: employee_user,
         },
         {
           path: '/personage_center',
@@ -66,6 +67,11 @@ export default new Router({
           name: 'mailbox',
           component: mailbox
         },
+        {
+          path: '/employee_user_update',
+          name: 'employee_user_update',
+          component: employee_user_update
+        }
       ]
     },
   ]
