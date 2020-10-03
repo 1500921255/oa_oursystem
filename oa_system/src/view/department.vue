@@ -6,10 +6,10 @@
       </el-col>
     </el-row>
     <el-row style="width:94%;height:40px;margin:10px auto;" class="q">
-      <el-col span="18">
+      <el-col :span="18">
         <el-button type="primary" size="mini" icon="el-icon-edit">新增</el-button>
       </el-col>
-      <el-col span="6">
+      <el-col :span="6">
         <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
       </el-col>
     </el-row>
