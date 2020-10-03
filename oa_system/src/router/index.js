@@ -10,8 +10,8 @@ import user_info from '@/view/user_info'
 import calendar from '@/view/calendar'
 import employee_user from '@/view/employee_user'
 import personage_center from '@/view/personage_center'
-
-
+import departmentupdate from '@/components/departmentupdate'
+import departmentadd from '@/components/departmentadd'
 
 Vue.use(Router)
 export default new Router({
@@ -60,12 +60,23 @@ export default new Router({
           path: '/department',
           name: 'department',
           component: department
+
         },
         {
           path: '/mailbox',
           name: 'mailbox',
           component: mailbox
         },
+        {
+          path: '/departmentupdate',
+          name: 'departmentupdate',
+          component: departmentupdate
+        },
+        {
+          path: '/departmentadd',
+          name: 'departmentadd',
+          component: departmentadd
+        }
       ]
     },
   ]

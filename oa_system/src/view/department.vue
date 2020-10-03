@@ -6,30 +6,35 @@
       </el-col>
     </el-row>
     <el-row style="width:94%;height:40px;margin:10px auto;" class="q">
-      <el-col span="18">
-        <el-button type="primary" size="mini" icon="el-icon-edit">新增</el-button>
+      <el-col :span="18">
+        <router-link to="/departmentadd">
+          <el-button type="primary" size="mini" icon="el-icon-edit">新增</el-button>
+        </router-link>
       </el-col>
-      <el-col span="6">
+      <el-col :span="6">
         <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
       </el-col>
     </el-row>
-    <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-      style="width: 94%;margin:0 auto;" class="el-tablelist">
+    <el-table :data=tableData style="width: 94%;margin:0 auto;" class="el-tablelist">
 
-      <el-table-column label="Date" prop="date">
+      <el-table-column label="Id" prop="departId">
       </el-table-column>
-      <el-table-column label="Name" prop="name">
+      <el-table-column label="Name" prop="departName">
+      </el-table-column>
+      <el-table-column label="data" prop="insertTime">
       </el-table-column>
       <el-table-column align="right">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+          <router-link to="/departmentupdate">
+            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+          </router-link>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
         </template>
       </el-table-column>
     </el-table>
     <el-row>
       <el-col style="margin:20px auto;">
-        <el-pagination background layout="prev, pager, next" :total="1000">
+        <el-pagination background layout="prev, pager, next" :page-count=pagecount @current-change="current_change">
         </el-pagination>
       </el-col>
     </el-row>
@@ -37,37 +42,87 @@
 </template>
 
 <script>
+import bus from '../assets/js/eventBus';
 export default {
   data () {
     return {
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }],
-      search: ''
+      tableData: [],
+      currentPage: '',
+      pagesize: '',
+      search: '',
+      pagecount: 0,
+      row: {}
     }
   },
   methods: {
     handleEdit (index, row) {
-      console.log(index, row);
+      console.log(index)
+      this.row = row
     },
     handleDelete (index, row) {
       console.log(index, row);
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.axios.delete("http://localhost:8080/depart-dict/departOne", {
+          params: {
+            q: row.departId
+          }
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          // 为了在删除最后一页的最后一条数据时能成功跳转回最后一页的上一页
+          this.current_change(this.currentPage)
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+    current_change: function (currentPage) {
+      console.log(currentPage)
+      this.currentPage = currentPage;
+      let that = this
+      this.axios.get("http://localhost:8080/depart-dict/departPage", {
+        params: {
+          currentPage: currentPage,
+          pagesize: 5
+        }
+      })
+        .then(function (response) {
+          that.tableData = response.data.data.Records
+          console.log(that.tableData);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   },
+  created () {
+    let that = this
+    this.axios.get("http://localhost:8080/depart-dict/departPage", {
+      params: {
+        currentPage: 1,
+        pagesize: 5
+      }
+    })
+      .then(function (response) {
+        that.tableData = response.data.data.Records
+        that.pagecount = response.data.data.Pages
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  },
+  beforeDestroy () {
+    bus.$emit('row', this.row);
+  }
 }
 </script>
 <style>
