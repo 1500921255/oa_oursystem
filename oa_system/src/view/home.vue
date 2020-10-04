@@ -6,7 +6,7 @@
           <!-- <img :src="img" class="logo"> -->
         </template>
         <template>
-          <span class="p-l-20">管理系统</span>
+          <span class="p-l-20">OA 管理系统</span>
         </template>
       </el-col>
       <el-col :span="1" class="menu-hidden">
@@ -14,19 +14,19 @@
       </el-col>
       <el-col :span="15" class="ofv-hd">
         <el-row>
-          <el-col :span="2">
-            乐山
+          <el-col :span="3" class="text-tq">
+            <a href="/#">{{this.city}}</a>   
           </el-col>
-          <el-col :span="2">
-            今天(周五):
-          </el-col>
-          <el-col :span="14">
-            18-25小雨
+          <!-- <el-col :span="5">
+            {{this.tq.date}}:
+          </el-col> -->
+          <el-col :span="5" class="text-tq">
+           <a href="/#"> {{this.tq.low}}~{{this.tq.high}}  {{this.tq.type}} 》</a>
           </el-col>
         </el-row>
       </el-col>
       <el-col :span="2" class="pos-rel">
-        欢迎你，管理员
+        欢迎你，{{MyemployeeUserinfo.employeeName}}
       </el-col>
       <el-col :span="1" class="pos-rel">
         <el-col :span="12" class="pos-rel">
@@ -43,7 +43,7 @@
       </el-col>
       <el-col :span="1" class="pos-rel">
         <i class="el-icon-switch-button"></i>
-        退出
+        <a href="" class="gohis" @click="goback()">退出</a>
       </el-col>
     </el-col>
     <el-col :span="24" class="panel-center">
@@ -59,7 +59,7 @@
     </el-col>
   </el-row>
 </template>
-
+ <script typet="text/javascript" async="async" src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
 <script>
 import leftmenu from '@/components/left_menu'
 export default {
@@ -69,7 +69,44 @@ export default {
   },
   data () {
     return {
+      city:'',
+      tq:[],
+      MyemployeeUserinfo:this.$store.state.MyemployeeUserinfo,
     }
+  },
+  methods:{
+    // 退出登录的方法
+    goback(){
+
+    }
+  },
+  created(){
+    let that = this
+     this.axios.get("https://bird.ioliu.cn/ip", {/**获取当前位置ip */
+      })
+      .then(function (response) {
+        that.axios.get("https://api.79xj.cn/ip.php?ip="+response.data.data.ip, {/**获取当前城市名称 */
+            })
+            .then(function (response) {
+              that.city = response.data.city.slice(3)
+                 that.axios.get("http://wthrcdn.etouch.cn/weather_mini?city="+that.city, {/**获取当前城市天气 */
+                  })
+                  .then(function (response) {
+                   // console.log(response.data.data)
+                    that.tq = response.data.data.forecast[0]
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+                  })
+            .catch(function (error) {
+              console.log(error);
+            });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      console.log(this.$store.state.MyemployeeUserinfo)
   }
 }
 </script>
@@ -89,7 +126,6 @@ export default {
 .fade-leave-active {
   opacity: 0;
 }
-
 .panel {
   position: absolute;
   top: 0px;
@@ -102,7 +138,8 @@ export default {
   line-height: 40px;
   background: white;
   color: #c0ccda;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 2px solid rgb(226, 217, 217);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.14)
 }
 
 .panel-center {
@@ -135,11 +172,19 @@ export default {
   text-align: center;
 }
 .menu-hidden {
-  border-left: 1px solid #cccccc;
-  border-right: 1px solid #cccccc;
+  border-left: 1px solid #e0dede;
+  border-right: 1px solid #dddada;
   text-align: center;
 }
 .pos-rel {
   font-size: 11px;
+}
+.text-tq{
+  color: rebeccapurple;
+  font-size: 12px;
+  text-align: center;
+}
+.gohis{
+  color: #c0ccda;
 }
 </style>

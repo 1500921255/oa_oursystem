@@ -10,9 +10,10 @@ import user_info from '@/view/user_info'
 import calendar from '@/view/calendar'
 import employee_user from '@/view/employee_user'
 import personage_center from '@/view/personage_center'
-import employee_user_update from '@/view/employee_user_update'
+import employee_user_update from '@/components/employee_user_update'
 import departmentupdate from '@/components/departmentupdate'
 import departmentadd from '@/components/departmentadd'
+import employee_user_add from '@/components/employee_user_add'
 
 
 Vue.use(Router)
@@ -73,7 +74,13 @@ export default new Router({
           path: '/employee_user_update',
           name: 'employee_user_update',
           component: employee_user_update
-        },{
+        },
+        {
+          path: '/employee_user_add',
+          name: 'employee_user_add',
+          component: employee_user_add  
+        },
+        {
           path: '/departmentupdate',
           name: 'departmentupdate',
           component: departmentupdate

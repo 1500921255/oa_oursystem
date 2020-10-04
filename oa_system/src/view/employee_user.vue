@@ -6,7 +6,7 @@
     <el-main class="main">
       <div class="tools">
         <el-button type="success" plain size="mini" class="btn-tools" 
-          >添加职工</el-button
+          @click="a()">添加职工</el-button
         >
         <el-input
           class="search"
@@ -63,6 +63,9 @@ export default {
       this.$store.commit('employeeUserinfoChange',row)
       this.$router.push("/employee_user_update");
     },
+    a(){
+    this.$router.push("/employee_user_add");
+  },
     handleDelete(row) {
       console.log(row.employeeId);
          this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
@@ -109,6 +112,7 @@ export default {
         console.log(error);
       });
     },
+    
   },
   created() {
     let that = this
@@ -117,7 +121,6 @@ export default {
       })
       .then(function (response) {
         that.tableData = response.data.data.data
-        console.log( that.tableData);
         that.pagecount = response.data.data.pages
         that.currentPages = response.data.data.currentPage
         //  that.total=that.tableData.length;
