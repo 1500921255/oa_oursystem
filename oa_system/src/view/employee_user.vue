@@ -5,8 +5,20 @@
     </el-header> -->
     <el-main class="main">
       <div class="tools">
+<<<<<<< HEAD
         <el-button type="success" plain size="mini" class="btn-tools">添加职工</el-button>
         <el-input class="search" v-model="search" size="small" placeholder="输入关键字搜索" />
+=======
+        <el-button type="success" plain size="mini" class="btn-tools" 
+          @click="a()">添加职工</el-button
+        >
+        <el-input
+          class="search"
+          v-model="search"
+          size="small"
+          placeholder="输入关键字搜索"
+        />
+>>>>>>> 0979541f5bf0d3d092141508bd19c4ab2f104b0b
       </div>
       <el-divider class="divider"></el-divider>
       <el-table :data="tableData" style="width: 100%">
@@ -49,7 +61,14 @@ export default {
       this.$store.commit('employeeUserinfoChange', row)
       this.$router.push("/employee_user_update");
     },
+<<<<<<< HEAD
     handleDelete (row) {
+=======
+    a(){
+    this.$router.push("/employee_user_add");
+  },
+    handleDelete(row) {
+>>>>>>> 0979541f5bf0d3d092141508bd19c4ab2f104b0b
       console.log(row.employeeId);
       this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -95,6 +114,7 @@ export default {
           console.log(error);
         });
     },
+    
   },
   created () {
     let that = this
@@ -103,7 +123,10 @@ export default {
     })
       .then(function (response) {
         that.tableData = response.data.data.data
+<<<<<<< HEAD
         console.log(that.tableData);
+=======
+>>>>>>> 0979541f5bf0d3d092141508bd19c4ab2f104b0b
         that.pagecount = response.data.data.pages
         that.currentPages = response.data.data.currentPage
         //  that.total=that.tableData.length;
