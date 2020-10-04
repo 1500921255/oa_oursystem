@@ -4,18 +4,22 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state:{
-        employeeUserinfo:[]
+  state: {
+    employeeUserinfo: [],
+    departmentinfo: []
+  },
+  mutations: {
+    employeeUserinfoChange (state, NewemployeeUserinfo) {
+      state.employeeUserinfo = NewemployeeUserinfo
     },
-    mutations:{
-        employeeUserinfoChange(state,NewemployeeUserinfo){
-            state.employeeUserinfo = NewemployeeUserinfo
-        }
-    },
-    modules:{
-
-    },
-    actions:{
-
+    departmentinfoChange (state, Newdepartmentinfo) {
+      state.departmentinfo = Newdepartmentinfo
     }
+  },
+  modules: {
+
+  },
+  actions: {
+
+  }
 })

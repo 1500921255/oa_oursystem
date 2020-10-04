@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import bus from '../assets/js/eventBus';
 export default {
   data () {
     return {
@@ -56,8 +55,7 @@ export default {
   },
   methods: {
     handleEdit (index, row) {
-      console.log(index)
-      this.row = row
+      this.$store.commit('departmentinfoChange', row)
     },
     handleDelete (index, row) {
       console.log(index, row);
@@ -119,9 +117,6 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
-  },
-  beforeDestroy () {
-    bus.$emit('row', this.row);
   }
 }
 </script>
