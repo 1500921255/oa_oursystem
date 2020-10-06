@@ -15,13 +15,13 @@
       <el-col :span="15" class="ofv-hd">
         <el-row>
           <el-col :span="3" class="text-tq">
-            <a href="/#">{{this.city}}</a>   
+            <a href="/#">{{this.city}}</a>
           </el-col>
           <!-- <el-col :span="5">
             {{this.tq.date}}:
           </el-col> -->
           <el-col :span="5" class="text-tq">
-           <a href="/#"> {{this.tq.low}}~{{this.tq.high}}  {{this.tq.type}} 》</a>
+            <a href="/#"> {{this.tq.low}}~{{this.tq.high}} {{this.tq.type}} 》</a>
           </el-col>
         </el-row>
       </el-col>
@@ -69,44 +69,44 @@ export default {
   },
   data () {
     return {
-      city:'',
-      tq:[],
-      MyemployeeUserinfo:this.$store.state.MyemployeeUserinfo,
+      city: '',
+      tq: [],
+      MyemployeeUserinfo: this.$store.state.MyemployeeUserinfo,
     }
   },
-  methods:{
+  methods: {
     // 退出登录的方法
-    goback(){
+    goback () {
 
     }
   },
-  created(){
+  created () {
     let that = this
-     this.axios.get("https://bird.ioliu.cn/ip", {/**获取当前位置ip */
-      })
+    this.axios.get("https://bird.ioliu.cn/ip", {/**获取当前位置ip */
+    })
       .then(function (response) {
-        that.axios.get("https://api.79xj.cn/ip.php?ip="+response.data.data.ip, {/**获取当前城市名称 */
+        that.axios.get("https://api.79xj.cn/ip.php?ip=" + response.data.data.ip, {/**获取当前城市名称 */
+        })
+          .then(function (response) {
+            that.city = response.data.city.slice(3)
+            that.axios.get("http://wthrcdn.etouch.cn/weather_mini?city=" + that.city, {/**获取当前城市天气 */
             })
-            .then(function (response) {
-              that.city = response.data.city.slice(3)
-                 that.axios.get("http://wthrcdn.etouch.cn/weather_mini?city="+that.city, {/**获取当前城市天气 */
-                  })
-                  .then(function (response) {
-                   // console.log(response.data.data)
-                    that.tq = response.data.data.forecast[0]
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                  });
-                  })
-            .catch(function (error) {
-              console.log(error);
-            });
+              .then(function (response) {
+                // console.log(response.data.data)
+                that.tq = response.data.data.forecast[0]
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       })
       .catch(function (error) {
         console.log(error);
       });
-      console.log(this.$store.state.MyemployeeUserinfo)
+    console.log(this.$store.state.MyemployeeUserinfo)
   }
 }
 </script>
@@ -139,7 +139,7 @@ export default {
   background: white;
   color: #c0ccda;
   border-bottom: 2px solid rgb(226, 217, 217);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.14)
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.14);
 }
 
 .panel-center {
@@ -179,12 +179,12 @@ export default {
 .pos-rel {
   font-size: 11px;
 }
-.text-tq{
+.text-tq {
   color: rebeccapurple;
   font-size: 12px;
   text-align: center;
 }
-.gohis{
+.gohis {
   color: #c0ccda;
 }
 </style>

@@ -6,8 +6,9 @@ import router from './router'
 import axios from '../node_modules/axios'
 import qs from 'qs'
 import store from './store'
+import moment from 'moment'
 
-
+Vue.prototype.$moment = moment;
 Vue.use(ElementUI)
 Vue.use(store)
 Vue.prototype.axios = axios
@@ -20,6 +21,7 @@ new Vue({
   axios,
   qs,
   store,
+  moment,
   method: {
   }
 }).$mount('#app')
