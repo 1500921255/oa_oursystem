@@ -20,7 +20,7 @@ new Vue({
   axios,
   qs,
   store,
-  method:{
+  method: {
   }
 }).$mount('#app')
 
