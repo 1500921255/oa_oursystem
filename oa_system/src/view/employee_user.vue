@@ -101,6 +101,7 @@ export default {
         methods: "get",
       })
       .then(function (response) {
+        console.log(response.data)
         that.tableData = response.data.data.data
         console.log( that.tableData);
         that.pagecount = response.data.data.pages
