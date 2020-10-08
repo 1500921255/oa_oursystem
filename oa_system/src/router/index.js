@@ -14,6 +14,7 @@ import employee_user_update from '@/components/employee_user_update'
 import departmentupdate from '@/components/departmentupdate'
 import departmentadd from '@/components/departmentadd'
 import employee_user_add from '@/components/employee_user_add'
+import error from '@/view/Error'
 
 
 Vue.use(Router)
@@ -89,6 +90,11 @@ export default new Router({
           path: '/departmentadd',
           name: 'departmentadd',
           component: departmentadd
+        },
+        {
+          path: '/Error',
+          name: 'error',
+          component: error
         }
       ]
     },

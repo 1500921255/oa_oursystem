@@ -88,9 +88,7 @@ export default {
       this.axios.get("http://localhost:8080/employee-user/Page/" + currentpage, {
         methods: "get",
       })
-<<<<<<< HEAD
       .then(function (response) {
-        console.log(response.data)
         that.tableData = response.data.data.data
         console.log( that.tableData);
         that.pagecount = response.data.data.pages
@@ -101,19 +99,7 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
-=======
-        .then(function (response) {
-          that.tableData = response.data.data.data
-          console.log(that.tableData);
-          that.pagecount = response.data.data.pages
-          that.currentPages = response.data.data.currentPage
-          //  that.total=that.tableData.length;
-          //  console.log(that.total)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
->>>>>>> 5498ffd5d353e071052a52406da6641fafb5a18d
+
     },
 
   },
@@ -123,11 +109,12 @@ export default {
       methods: "get",
     })
       .then(function (response) {
+        console.log(response.data)
         that.tableData = response.data.data.data
         that.pagecount = response.data.data.pages
         that.currentPages = response.data.data.currentPage
-        //  that.total=that.tableData.length;
-        //  console.log(that.total)
+         that.total=that.tableData.length;
+         console.log(that.total)
       })
       .catch(function (error) {
         console.log(error);

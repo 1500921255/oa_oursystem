@@ -33,7 +33,6 @@ export default {
         alert("账号或密码不能为空")
       } else {
         this.axios.get('http://localhost:8080/employee-user/login', {
-<<<<<<< HEAD
         params: {
           employee_user: this.username,
           employee_pwd: this.password
@@ -47,23 +46,8 @@ export default {
           }else{
             that.$store.commit("MyemployeeUserinfoChange",response.data.data)
             that.$router.push("/home");
-=======
-          params: {
-            employee_user: this.username,
-            employee_pwd: this.password
->>>>>>> e46dcf5f08798ae37e8c63db8ae541b002d3eac5
           }
         })
-          .then(function (response) {
-            // console.log(response.data.data);
-            if (response.data.data == null) {
-              //  that.$options.methods.Loginfailalert()
-              alert("登陆失败")
-            } else {
-              that.$store.commit("MyemployeeUserinfoChange", response.data.data)
-              that.$router.push("/home");
-            }
-          })
           .catch(function (error) {
             console.log(error);
           });
