@@ -45,6 +45,7 @@ export default {
               alert("登陆失败")
             } else {
               that.$store.commit("MyemployeeUserinfoChange", response.data.data)
+              console.log(response.data.data)
               that.$router.push("/home");
             }
           })

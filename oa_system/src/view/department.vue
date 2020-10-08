@@ -105,6 +105,13 @@ export default {
   created () {
     let that = this
     this.axios.get("http://localhost:8080/depart-dict/departPage", {
+      headers: {
+
+        'Content-Type': "application/json;charset=utf-8",
+
+        'Access-Control-Allow-Credentials': "true"//1
+
+      },
       params: {
         currentPage: 1,
         pagesize: 5
