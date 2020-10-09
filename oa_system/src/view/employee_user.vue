@@ -5,8 +5,8 @@
     </el-header> -->
     <el-main class="main">
       <div class="tools">
-        <el-button type="success" plain size="mini" class="btn-tools">添加职工</el-button>
-        <el-input class="search" v-model="search" size="small" placeholder="输入关键字搜索" />
+        <!-- <el-button type="success" plain size="mini" class="btn-tools">添加职工</el-button> -->
+        <!-- <el-input class="search" v-model="search" size="small" placeholder="输入关键字搜索" /> -->
         <el-button type="success" plain size="mini" class="btn-tools" @click="a()">添加职工</el-button>
         <el-input class="search" v-model="search" size="small" placeholder="输入关键字搜索" />
       </div>
@@ -55,6 +55,7 @@ export default {
       this.$router.push("/employee_user_add");
     },
     handleDelete (row) {
+      let that = this
       console.log(row.employeeId);
       this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -63,10 +64,14 @@ export default {
       }).then(() => {
         this.axios.delete("http://localhost:8080/employee-user/DeleteUser/" + row.employeeId, {
           methods: "delete",
+          headers: {
+                authorization: that.$store.state.userToken,
+              },
         })
           .then(function (response) {
             console.log(response.data);
             window.location.reload();
+           
           })
           .catch(function (error) {
             console.log(error);
@@ -105,11 +110,17 @@ export default {
   },
   created () {
     let that = this
+    console.log(that.$store.state.userToken)
     this.axios.get("http://localhost:8080/employee-user/Page/1", {
-      methods: "get",
+       headers: {
+          authorization: that.$store.state.userToken,
+  },
     })
       .then(function (response) {
         console.log(response.data)
+          if(response.data.msg == "未登录"){
+              alert('未登录')
+            }
         that.tableData = response.data.data.data
         that.pagecount = response.data.data.pages
         that.currentPages = response.data.data.currentPage
