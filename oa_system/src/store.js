@@ -21,7 +21,8 @@ export default new Vuex.Store({
       label: '启用'
     }],
     MyemployeeUserinfo: [],
-    departmentinfo: []
+    departmentinfo: [],
+    userToken:''
   },
   mutations: {
     employeeUserinfoChange (state, NewemployeeUserinfo) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     MyemployeeUserinfoChange (state, NewemployeeUserinfo) {
       state.MyemployeeUserinfo = NewemployeeUserinfo
+    },
+    userTokenChange(state,NewUserToken){
+      state.userToken = NewUserToken
     }
   },
   modules: {

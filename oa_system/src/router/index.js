@@ -95,9 +95,10 @@ export default new Router({
           path: '/Error',
           name: 'error',
           component: error
-        }
+        },
       ]
     },
+    
   ]
 })
 

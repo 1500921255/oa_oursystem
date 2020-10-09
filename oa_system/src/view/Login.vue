@@ -39,12 +39,13 @@ export default {
         }
       })
         .then(function (response) {
-          console.log(response.data);
+         // console.log(response.data);
           if(response.data.flag ==false){
           //  that.$options.methods.Loginfailalert()
           alert("登陆失败")
           }else{
-            that.$store.commit("MyemployeeUserinfoChange",response.data.data)
+            that.$store.commit("userTokenChange",response.data.data)
+            console.log(that.$store.state.userToken)
             that.$router.push("/home");
           }
         })
