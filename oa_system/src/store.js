@@ -21,8 +21,7 @@ export default new Vuex.Store({
       label: '启用'
     }],
     MyemployeeUserinfo: [],
-    departmentinfo: [],
-
+    departmentinfo: []
   },
   mutations: {
     employeeUserinfoChange (state, NewemployeeUserinfo) {

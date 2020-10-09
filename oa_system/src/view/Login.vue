@@ -39,7 +39,7 @@ export default {
           }
         })
           .then(function (response) {
-            // console.log(response.data.data);
+            console.log(response.data.data);
             if (response.data.data == null) {
               //  that.$options.methods.Loginfailalert()
               alert("登陆失败")
@@ -49,6 +49,7 @@ export default {
               that.$router.push("/home");
             }
           })
+
           .catch(function (error) {
             console.log(error);
           });
