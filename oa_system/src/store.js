@@ -22,7 +22,7 @@ export default new Vuex.Store({
     }],
     MyemployeeUserinfo: [],
     departmentinfo: [],
-    userToken:''
+    userToken: ''
   },
   mutations: {
     employeeUserinfoChange (state, NewemployeeUserinfo) {
@@ -34,7 +34,7 @@ export default new Vuex.Store({
     MyemployeeUserinfoChange (state, NewemployeeUserinfo) {
       state.MyemployeeUserinfo = NewemployeeUserinfo
     },
-    userTokenChange(state,NewUserToken){
+    userTokenChange (state, NewUserToken) {
       state.userToken = NewUserToken
     }
   },

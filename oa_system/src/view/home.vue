@@ -12,7 +12,7 @@
       <el-col :span="1" class="menu-hidden">
         <i class="el-icon-menu"></i>
       </el-col>
-      <el-col :span="15" class="ofv-hd">
+      <el-col :span="13" class="ofv-hd">
         <el-row>
           <el-col :span="3" class="text-tq">
             <a href="/#">{{this.city}}</a>
@@ -28,12 +28,12 @@
       <el-col :span="2" class="pos-rel">
         欢迎你，{{MyemployeeUserinfo.employeeName}}
       </el-col>
-      <el-col :span="1" class="pos-rel">
+      <el-col :span="2" class="pos-rel">
         <el-col :span="12" class="pos-rel">
           <i class="el-icon-message"></i>
         </el-col>
         <el-col :span="12" class="pos-rel">
-          <i class="el-icon-message-solid"></i>
+          <el-button @click="show2 = !show2"><i @click="show(show2)" class="el-icon-message-solid"></i></el-button>
         </el-col>
       </el-col>
       <el-col :span="1" class="pos-rel">
@@ -57,6 +57,24 @@
         </div>
       </section>
     </el-col>
+    <transition name="el-zoom-in-bottom">
+      <div v-show="show2" class="transition-box">
+        <div class="notice-text"> 消息通知({{noticenum}})</div>
+        <div v-for="o in 4" :key="o" class="text item">
+          <el-card class="box-card" style="height:100px">
+            <el-row>
+              <el-col :span="6">
+                <img src="../assets/images/weidu.png">
+              </el-col>
+              <el-col :span="18" class="notice-el-col">
+                {{o}}
+              </el-col>
+            </el-row>
+          </el-card>
+        </div>
+
+      </div>
+    </transition>
   </el-row>
 </template>
  <script typet="text/javascript" async="async" src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
@@ -65,10 +83,12 @@ import leftmenu from '@/components/left_menu'
 export default {
   name: 'home',
   components: {
-    leftmenu,
+    leftmenu
   },
   data () {
     return {
+      noticenum: 4,
+      show2: true,
       city: '',
       tq: [],
       MyemployeeUserinfo: this.$store.state.MyemployeeUserinfo,
@@ -82,31 +102,31 @@ export default {
   },
   created () {
     let that = this
-    this.axios.get("https://bird.ioliu.cn/ip", {/**获取当前位置ip */
-    })
-      .then(function (response) {
-        that.axios.get("https://api.79xj.cn/ip.php?ip=" + response.data.data.ip, {/**获取当前城市名称 */
-        })
-          .then(function (response) {
-            that.city = response.data.city.slice(3)
-            that.axios.get("http://wthrcdn.etouch.cn/weather_mini?city=" + that.city, {/**获取当前城市天气 */
-            })
-              .then(function (response) {
-                // console.log(response.data.data)
-                that.tq = response.data.data.forecast[0]
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    console.log(this.$store.state.MyemployeeUserinfo)
+    // this.axios.get("https://bird.ioliu.cn/ip", {/**获取当前位置ip */
+    // })
+    //   .then(function (response) {
+    //     that.axios.get("https://api.79xj.cn/ip.php?ip=" + response.data.data.ip, {/**获取当前城市名称 */
+    //     })
+    //       .then(function (response) {
+    //         that.city = response.data.city.slice(3)
+    //         that.axios.get("http://wthrcdn.etouch.cn/weather_mini?city=" + that.city, {/**获取当前城市天气 */
+    //         })
+    //           .then(function (response) {
+    //             // console.log(response.data.data)
+    //             that.tq = response.data.data.forecast[0]
+    //           })
+    //           .catch(function (error) {
+    //             console.log(error);
+    //           });
+    //       })
+    //       .catch(function (error) {
+    //         console.log(error);
+    //       });
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    // console.log(this.$store.state.MyemployeeUserinfo)
   }
 }
 </script>
@@ -116,6 +136,10 @@ export default {
   padding: 0px;
   margin: 0px;
   border: 0px;
+}
+.notice-el-col {
+  height: 60px;
+  line-height: 60px;
 }
 .fade-enter-active,
 .fade-leave-active {
@@ -186,5 +210,22 @@ export default {
 }
 .gohis {
   color: #c0ccda;
+}
+.transition-box {
+  position: absolute;
+  left: 76%;
+  bottom: 0px;
+  width: 410px;
+  height: 720px;
+  background-color: #ffffff;
+  color: black;
+  box-sizing: border-box;
+  z-index: 995;
+}
+.notice-text {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border-bottom: 1px solid #eeeeee;
 }
 </style>
