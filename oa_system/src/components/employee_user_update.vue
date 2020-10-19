@@ -119,8 +119,13 @@ export default {
             }
           )
           .then(function (response) {
-            console.log(response.data);
-            alert("修改成功");
+            if(response.data.msg =="您暂无此权限该操作"){
+              alert("您暂无此权限该操作")
+            }else{
+              console.log(response.data);
+              alert("修改成功");
+            }
+            
           })
           .catch(function (error) {
             console.log(error);
@@ -136,8 +141,8 @@ export default {
     this.axios
       .get("http://localhost:8080/depart-dict/departs", {
         headers: {
-                authorization: that.$store.state.userToken,
-              },
+          authorization: that.$store.state.userToken,
+        },
       })
       .then(function (response) {
         console.log(response.data);

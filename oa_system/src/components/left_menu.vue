@@ -3,7 +3,7 @@
     <el-col :span="12">
       <el-menu :default-active="this.$router.path" class="el-menu-vertical-demo">
 
-        <router-link to="/index">
+        <!-- <router-link to="/index">
           <el-menu-item index="1">
             <i class="el-icon-s-home"></i>
             <span slot="title">首页</span>
@@ -55,7 +55,14 @@
             <i class="el-icon-message-solid"></i>
             <span slot="title">通知公告</span>
           </el-menu-item>
-        </router-link>
+        </router-link> -->
+
+        <router-link v-for="item in menulist" :to='"/"+item.router' :key="item.id">
+          <el-menu-item>
+            <i class="el-icon-user-solid"></i>
+            <span slot="title">{{item.menuName}}</span>
+          </el-menu-item>
+       </router-link>
 
       </el-menu>
     </el-col>
@@ -65,6 +72,11 @@
   <script>
 export default {
   name: 'leftmenu',
+  data(){
+    return{
+      menulist:this.$store.state.UserMenus
+    }
+  },
   method: {
     native (index) {
       console.log(index)

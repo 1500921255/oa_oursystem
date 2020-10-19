@@ -125,8 +125,12 @@ export default {
             }
           )
           .then(function (response) {
-            console.log(response);
+             if(response.data.msg =="您暂无此权限该操作"){
+              alert("您暂无此权限该操作")
+            }else{
+               console.log(response);
             alert("添加成功");
+            }
           })
           .catch(function (error) {
             console.log(error);
@@ -148,8 +152,8 @@ export default {
               },
       })
       .then(function (response) {
-        console.log(response.data);
-        that.departs = response.data.data;
+               console.log(response.data);
+               that.departs = response.data.data;
       })
       .catch(function (error) {
         console.log(error);

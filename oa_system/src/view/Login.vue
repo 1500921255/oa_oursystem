@@ -39,18 +39,20 @@ export default {
             employee_pwd: this.password
           }
         })
-          // .then(function (response) {
-          //   websocket.created();
-          //   // console.log(response.data);
-          //   if (response.data.flag == false) {
-          //     //  that.$options.methods.Loginfailalert()
-          //     alert("登陆失败")
-          //   } else {
-          //     that.$store.commit("userTokenChange", response.data.data)
-          //     console.log(that.$store.state.userToken)
-          //     that.$router.push("/home");
-          //   }
-          // })
+          .then(function (response) {
+            // console.log(response.data);
+            if (response.data.flag == false) {
+              //  that.$options.methods.Loginfailalert()
+              alert("登陆失败")
+            } else {
+              that.$store.commit("userTokenChange", response.data.data.SessionID)
+              that.$store.commit("UserRolesChange", response.data.data.roles)
+              that.$store.commit("UserPermsChange", response.data.data.perms)
+              that.$store.commit("UserMenusChange", response.data.data.menus)
+              console.log(that.$store.state.UserMenus)
+              that.$router.push("/home");
+            }
+          })
           .then(function (response) {
             console.log(response.data.data);
             if (response.data.data == null) {

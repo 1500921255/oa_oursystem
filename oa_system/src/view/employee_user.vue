@@ -69,8 +69,13 @@ export default {
               },
         })
           .then(function (response) {
-            console.log(response.data);
-            window.location.reload();
+            if(response.data.msg =="您暂无此权限该操作"){
+              alert("您暂无此权限该操作")
+            }else{
+              console.log(response.data);
+              window.location.reload();
+            }
+            
            
           })
           .catch(function (error) {
@@ -120,12 +125,17 @@ export default {
         console.log(response.data)
           if(response.data.msg == "未登录"){
               alert('未登录')
+            }else if(response.data.msg =="您暂无此权限该操作"){
+              alert("您暂无此权限该操作")
             }
-        that.tableData = response.data.data.data
-        that.pagecount = response.data.data.pages
-        that.currentPages = response.data.data.currentPage
-         that.total=that.tableData.length;
-         console.log(that.total)
+            else{
+          that.tableData = response.data.data.data
+          that.pagecount = response.data.data.pages
+          that.currentPages = response.data.data.currentPage
+          that.total=that.tableData.length;
+          console.log(that.total)
+            }
+        
       })
       .catch(function (error) {
         console.log(error);
