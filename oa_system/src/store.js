@@ -27,7 +27,7 @@ export default new Vuex.Store({
     UserPerms:[],
     UserMenus:[],
     userRoleinfo:[]
-  },
+ },
   mutations: {
     employeeUserinfoChange (state, NewemployeeUserinfo) {
       state.employeeUserinfo = NewemployeeUserinfo
@@ -38,16 +38,16 @@ export default new Vuex.Store({
     MyemployeeUserinfoChange (state, NewemployeeUserinfo) {
       state.MyemployeeUserinfo = NewemployeeUserinfo
     },
-    userTokenChange(state,NewUserToken){
+    userTokenChange (state, NewUserToken) {
       state.userToken = NewUserToken
-    }, 
-    UserRolesChange(state,NewUserRoles){
+    },
+    UserRolesChange (state, NewUserRoles) {
       state.UserRoles = NewUserRoles
     },
-    UserPermsChange(state,NewUserPerms){
+    UserPermsChange (state, NewUserPerms) {
       state.UserPerms = NewUserPerms
     },
-    UserMenusChange(state,NewUserMenus){
+    UserMenusChange (state, NewUserMenus) {
       state.UserMenus = NewUserMenus
     },
     userRoleinfoChange(state,NewuserRoleinfo){

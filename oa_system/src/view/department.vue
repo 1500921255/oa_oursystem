@@ -105,9 +105,9 @@ export default {
   created () {
     let that = this
     this.axios.get("http://localhost:8080/depart-dict/departPage", {
-       headers: {
-          authorization: that.$store.state.userToken,
-  },
+      headers: {
+        authorization: that.$store.state.userToken,
+      },
       params: {
         currentPage: 1,
         pagesize: 5

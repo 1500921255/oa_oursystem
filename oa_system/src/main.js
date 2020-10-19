@@ -7,7 +7,9 @@ import axios from '../node_modules/axios'
 import qs from 'qs'
 import store from './store'
 import moment from 'moment'
+import websocket from 'websocket'
 
+Vue.prototype.websocket = websocket;
 Vue.prototype.$moment = moment;
 Vue.use(ElementUI)
 Vue.use(store)
@@ -22,6 +24,7 @@ new Vue({
   qs,
   store,
   moment,
+  websocket,
   method: {
   }
 }).$mount('#app')

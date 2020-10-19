@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import websocket from '../assets/js/websocket'
 export default {
   name: "login",
   methods: {
@@ -33,25 +34,39 @@ export default {
         alert("账号或密码不能为空")
       } else {
         this.axios.get('http://localhost:8080/employee-user/login', {
-        params: {
-          employee_user: this.username,
-          employee_pwd: this.password
-        }
-      })
-        .then(function (response) {
-         // console.log(response.data);
-          if(response.data.flag ==false){
-          //  that.$options.methods.Loginfailalert()
-          alert("登陆失败")
-          }else{
-            that.$store.commit("userTokenChange",response.data.data.SessionID)
-            that.$store.commit("UserRolesChange",response.data.data.roles)
-            that.$store.commit("UserPermsChange",response.data.data.perms)
-            that.$store.commit("UserMenusChange",response.data.data.menus)
-            console.log(that.$store.state.UserMenus)
-            that.$router.push("/home");
+          params: {
+            employee_user: this.username,
+            employee_pwd: this.password
           }
         })
+          .then(function (response) {
+            // console.log(response.data);
+            if (response.data.flag == false) {
+              //  that.$options.methods.Loginfailalert()
+              alert("登陆失败")
+            } else {
+              that.$store.commit("userTokenChange", response.data.data.SessionID)
+              that.$store.commit("UserRolesChange", response.data.data.roles)
+              that.$store.commit("UserPermsChange", response.data.data.perms)
+              that.$store.commit("UserMenusChange", response.data.data.menus)
+              console.log(that.$store.state.UserMenus)
+              that.$router.push("/home");
+            }
+          })
+          .then(function (response) {
+            console.log(response.data.data);
+            if (response.data.data == null) {
+              //  that.$options.methods.Loginfailalert()
+              alert("登陆失败")
+            } else {
+              that.$store.commit("employeeUserinfoChange", response.config.params)
+              that.$store.commit("MyemployeeUserinfoChange", response.data.data)
+              console.log(response.data.data)
+              websocket.created(that.$store.state.employeeUserinfo.employee_user);
+              that.$router.push("/home");
+            }
+          })
+
           .catch(function (error) {
             console.log(error);
           });

@@ -12,9 +12,12 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.2.1",
     "moment": "^2.29.0",
+    "nodejs-websocket": "^1.7.2",
     "vue": "^2.6.11",
     "vue-router": "^3.4.3",
-    "vuex": "^3.5.1"
+    "vuex": "^3.5.1",
+    "websocket": "^1.0.32",
+    "ws": "^7.3.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
