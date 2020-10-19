@@ -15,6 +15,9 @@ import departmentupdate from '@/components/departmentupdate'
 import departmentadd from '@/components/departmentadd'
 import employee_user_add from '@/components/employee_user_add'
 import error from '@/view/Error'
+import sys_conf from '@/view/sys_conf'
+import role_perms from '@/components/role_perms'
+import roleadd from '@/components/roleadd'
 
 
 Vue.use(Router)
@@ -96,6 +99,21 @@ export default new Router({
           name: 'error',
           component: error
         },
+        {
+          path: '/sys_conf',
+          name: 'sys_conf',
+          component: sys_conf
+        },
+        {
+          path:'/role_perms',
+          name:'role_perms',
+          component:role_perms
+        },
+        {
+          path:'/roleadd',
+          name:'roleadd',
+          component:roleadd
+        }
       ]
     },
     

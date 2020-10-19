@@ -27,7 +27,7 @@
         </el-table-column>
       </el-table>
       <div class="pagination">
-        <el-pagination background layout="prev, pager, next" :page-count='pagecount' @current-change="currentPage">
+        <el-pagination background layout="prev, pager, next"  :page-count='pagecount' @current-change="currentPage">
         </el-pagination>
       </div>
     </el-main>
@@ -97,8 +97,12 @@ export default {
       let that = this
       this.axios.get("http://localhost:8080/employee-user/Page/" + currentpage, {
         methods: "get",
+        headers: {
+          authorization: that.$store.state.userToken,
+  },
       })
       .then(function (response) {
+        console.log(response.data.data.data)
         that.tableData = response.data.data.data
         console.log( that.tableData);
         that.pagecount = response.data.data.pages
@@ -131,7 +135,7 @@ export default {
             else{
           that.tableData = response.data.data.data
           that.pagecount = response.data.data.pages
-          that.currentPages = response.data.data.currentPage
+         // that.currentPages = response.data.data.currentPage
           that.total=that.tableData.length;
           console.log(that.total)
             }
